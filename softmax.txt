@@ -1,0 +1,18 @@
+softmax
+	
+"Para implementacion LPP"
+	"Convierte una coleccion de log-weights en una distribucion de probabilidades usando Softmax"
+    	| maxLog expValues sumExp |
+     	self isEmpty ifTrue: [ ^ self copy ].
+    
+	"1. Encontramos el valor maximo para dar estabilidad numerica"
+	maxLog := self max.
+    
+	"2. Restamos el maximo y aplicamos la exponencial a cada elemento"
+	expValues := self collect: [ :each | (each - maxLog) exp ].
+    
+	 "3. Sumamos todos los valores exponenciales"
+	sumExp := expValues sum.
+    
+	"4. Dividimos cada elemento por la suma para normalizar entre 0 y 1"
+	^ expValues collect: [ :each | each / sumExp ]

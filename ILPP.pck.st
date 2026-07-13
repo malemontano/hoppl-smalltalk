@@ -1,7 +1,6 @@
-'From Cuis7.3 [latest update: #7158] on 13 July 2026 at 12:00:35 am'!
+'From Cuis7.3 [latest update: #7158] on 13 July 2026 at 1:56:13 am'!
 'Description '!
-!provides: 'ILPP' 1 0!
-!requires: 'ProbabilityDistributions' 1 0 nil!
+!provides: 'ILPP' 1 1!
 SystemOrganization addCategory: #ILPP!
 
 
@@ -25,8 +24,78 @@ Object subclass: #Closure
 Closure class
 	instanceVariableNames: ''!
 
+!classDefinition: #HOPPLParser category: #ILPP!
+Object subclass: #HOPPLParser
+	instanceVariableNames: 'globalEnv'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'ILPP'!
+!classDefinition: 'HOPPLParser class' category: #ILPP!
+HOPPLParser class
+	instanceVariableNames: ''!
+
+!classDefinition: #InferenceController category: #ILPP!
+Object subclass: #InferenceController
+	instanceVariableNames: 'logWeight'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'ILPP'!
+!classDefinition: 'InferenceController class' category: #ILPP!
+InferenceController class
+	instanceVariableNames: ''!
+
+!classDefinition: #LikelihoodIC category: #ILPP!
+InferenceController subclass: #LikelihoodIC
+	instanceVariableNames: 'program iterationsLeft environment'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'ILPP'!
+!classDefinition: 'LikelihoodIC class' category: #ILPP!
+LikelihoodIC class
+	instanceVariableNames: ''!
+
+!classDefinition: #SSMetropolisHastingsIC category: #ILPP!
+InferenceController subclass: #SSMetropolisHastingsIC
+	instanceVariableNames: 'programStack rng environment sampleLogProbs observeLogProbs trace'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'ILPP'!
+!classDefinition: 'SSMetropolisHastingsIC class' category: #ILPP!
+SSMetropolisHastingsIC class
+	instanceVariableNames: ''!
+
+!classDefinition: #SequentialMCIC category: #ILPP!
+InferenceController subclass: #SequentialMCIC
+	instanceVariableNames: 'program randomGen environment'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'ILPP'!
+!classDefinition: 'SequentialMCIC class' category: #ILPP!
+SequentialMCIC class
+	instanceVariableNames: ''!
+
+!classDefinition: #Machine category: #ILPP!
+Object subclass: #Machine
+	instanceVariableNames: 'controlStack valueStack environment logWeight randomGen'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'ILPP'!
+!classDefinition: 'Machine class' category: #ILPP!
+Machine class
+	instanceVariableNames: ''!
+
+!classDefinition: #MachineInstruction category: #ILPP!
+Object subclass: #MachineInstruction
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'ILPP'!
+!classDefinition: 'MachineInstruction class' category: #ILPP!
+MachineInstruction class
+	instanceVariableNames: ''!
+
 !classDefinition: #Continuation category: #ILPP!
-Object subclass: #Continuation
+MachineInstruction subclass: #Continuation
 	instanceVariableNames: ''
 	classVariableNames: ''
 	poolDictionaries: ''
@@ -86,7 +155,7 @@ SampleContinuation class
 	instanceVariableNames: ''!
 
 !classDefinition: #Discard category: #ILPP!
-Object subclass: #Discard
+MachineInstruction subclass: #Discard
 	instanceVariableNames: ''
 	classVariableNames: ''
 	poolDictionaries: ''
@@ -96,7 +165,7 @@ Discard class
 	instanceVariableNames: ''!
 
 !classDefinition: #Expression category: #ILPP!
-Object subclass: #Expression
+MachineInstruction subclass: #Expression
 	instanceVariableNames: ''
 	classVariableNames: ''
 	poolDictionaries: ''
@@ -185,64 +254,14 @@ Expression subclass: #VariableExpr
 VariableExpr class
 	instanceVariableNames: ''!
 
-!classDefinition: #HOPPLParser category: #ILPP!
-Object subclass: #HOPPLParser
-	instanceVariableNames: 'globalEnv'
+!classDefinition: #RestoreEnvironment category: #ILPP!
+MachineInstruction subclass: #RestoreEnvironment
+	instanceVariableNames: 'environmentCorruptor'
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'ILPP'!
-!classDefinition: 'HOPPLParser class' category: #ILPP!
-HOPPLParser class
-	instanceVariableNames: ''!
-
-!classDefinition: #InferenceController category: #ILPP!
-Object subclass: #InferenceController
-	instanceVariableNames: 'logWeight'
-	classVariableNames: ''
-	poolDictionaries: ''
-	category: 'ILPP'!
-!classDefinition: 'InferenceController class' category: #ILPP!
-InferenceController class
-	instanceVariableNames: ''!
-
-!classDefinition: #LikelihoodIC category: #ILPP!
-InferenceController subclass: #LikelihoodIC
-	instanceVariableNames: 'program values iterationsLeft logWeights environment'
-	classVariableNames: ''
-	poolDictionaries: ''
-	category: 'ILPP'!
-!classDefinition: 'LikelihoodIC class' category: #ILPP!
-LikelihoodIC class
-	instanceVariableNames: ''!
-
-!classDefinition: #SSMetropolisHastingsIC category: #ILPP!
-InferenceController subclass: #SSMetropolisHastingsIC
-	instanceVariableNames: 'programStack rng environment'
-	classVariableNames: ''
-	poolDictionaries: ''
-	category: 'ILPP'!
-!classDefinition: 'SSMetropolisHastingsIC class' category: #ILPP!
-SSMetropolisHastingsIC class
-	instanceVariableNames: ''!
-
-!classDefinition: #SequentialMCIC category: #ILPP!
-InferenceController subclass: #SequentialMCIC
-	instanceVariableNames: 'program randomGen environment'
-	classVariableNames: ''
-	poolDictionaries: ''
-	category: 'ILPP'!
-!classDefinition: 'SequentialMCIC class' category: #ILPP!
-SequentialMCIC class
-	instanceVariableNames: ''!
-
-!classDefinition: #Machine category: #ILPP!
-Object subclass: #Machine
-	instanceVariableNames: 'controlStack valueStack environment logWeight randomGen'
-	classVariableNames: ''
-	poolDictionaries: ''
-	category: 'ILPP'!
-!classDefinition: 'Machine class' category: #ILPP!
-Machine class
+!classDefinition: 'RestoreEnvironment class' category: #ILPP!
+RestoreEnvironment class
 	instanceVariableNames: ''!
 
 !classDefinition: #ProbabilityDistribution category: #ILPP!
@@ -275,18 +294,18 @@ ProbabilityDistribution subclass: #NormalProbabilityDistribution
 NormalProbabilityDistribution class
 	instanceVariableNames: ''!
 
-!classDefinition: #RestoreEnvironment category: #ILPP!
-Object subclass: #RestoreEnvironment
-	instanceVariableNames: 'environmentCorruptor'
+!classDefinition: #NotificationBreakpoints category: #ILPP!
+Notification subclass: #NotificationBreakpoints
+	instanceVariableNames: ''
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'ILPP'!
-!classDefinition: 'RestoreEnvironment class' category: #ILPP!
-RestoreEnvironment class
+!classDefinition: 'NotificationBreakpoints class' category: #ILPP!
+NotificationBreakpoints class
 	instanceVariableNames: ''!
 
 !classDefinition: #DoneNotification category: #ILPP!
-Notification subclass: #DoneNotification
+NotificationBreakpoints subclass: #DoneNotification
 	instanceVariableNames: 'result machine'
 	classVariableNames: ''
 	poolDictionaries: ''
@@ -296,7 +315,7 @@ DoneNotification class
 	instanceVariableNames: ''!
 
 !classDefinition: #ObserveNotification category: #ILPP!
-Notification subclass: #ObserveNotification
+NotificationBreakpoints subclass: #ObserveNotification
 	instanceVariableNames: 'distribution observedValue machine'
 	classVariableNames: ''
 	poolDictionaries: ''
@@ -306,7 +325,7 @@ ObserveNotification class
 	instanceVariableNames: ''!
 
 !classDefinition: #SampleNotification category: #ILPP!
-Notification subclass: #SampleNotification
+NotificationBreakpoints subclass: #SampleNotification
 	instanceVariableNames: 'distribution'
 	classVariableNames: ''
 	poolDictionaries: ''
@@ -325,14 +344,14 @@ TestCase subclass: #HOPPLParserTest
 HOPPLParserTest class
 	instanceVariableNames: ''!
 
-!classDefinition: #TPTest category: #ILPP!
-TestCase subclass: #TPTest
+!classDefinition: #HOPPLTest category: #ILPP!
+TestCase subclass: #HOPPLTest
 	instanceVariableNames: ''
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'ILPP'!
-!classDefinition: 'TPTest class' category: #ILPP!
-TPTest class
+!classDefinition: 'HOPPLTest class' category: #ILPP!
+HOPPLTest class
 	instanceVariableNames: ''!
 
 
@@ -352,12 +371,14 @@ h _ Histogram binCount: 500 minValue: -5 maxValue: 5.
 100000 timesRepeat: [ h addValue: r nextRandomNumber  ].
 h plot.!
 
-!Bind methodsFor: 'as yet unclassified' stamp: 'mm 9/Jul/2026, 11:07:48 pm (UTC)'!
+!Bind methodsFor: 'as yet unclassified' stamp: 'mm 7/13/2026 01:49:14'!
 getValue
+
 	^value ! !
 
-!Bind methodsFor: 'as yet unclassified' stamp: 'mm 9/Jul/2026, 11:09:27 pm (UTC)'!
+!Bind methodsFor: 'as yet unclassified' stamp: 'mm 7/13/2026 01:49:17'!
 getVariable
+
 	^variable ! !
 
 !Bind methodsFor: 'as yet unclassified' stamp: 'mm 9/Jul/2026, 11:09:16 pm (UTC)'!
@@ -394,308 +415,7 @@ parameters
 withParameters: parametersList body: aBody andEnvironment: anEnvironment 
 	^self new initializeWithParameters: parametersList body: aBody andEnvironment: anEnvironment ! !
 
-!Continuation methodsFor: 'evaluate' stamp: 'CR 5/Jul/2026, 1:21:38 am (UTC)'!
-evaluateIn: aMachine
-
-	self subclassResponsibility 
-
-! !
-
-!CallContinuation methodsFor: 'evaluating' stamp: 'mm 6/Jul/2026, 10:58:38 pm (UTC)'!
-evaluateIn: aMachine 
-	aMachine continueCall: self! !
-
-!CallContinuation methodsFor: 'initialization' stamp: 'mm 12/Jul/2026, 9:17:49 pm (UTC)'!
-initializeWithArgumentCount: anArgumentCount andEnvironment: anEnvironmentToPreserve  
-	argCount := anArgumentCount .
-	oldEnvironment := anEnvironmentToPreserve .! !
-
-!CallContinuation methodsFor: 'accessing' stamp: 'mm 6/Jul/2026, 11:03:16 pm (UTC)'!
-argCount
-	^argCount ! !
-
-!CallContinuation methodsFor: 'accessing' stamp: 'mm 12/Jul/2026, 9:18:06 pm (UTC)'!
-oldEnvironment
-	^oldEnvironment ! !
-
-!CallContinuation class methodsFor: 'as yet unclassified' stamp: 'mm 12/Jul/2026, 9:17:15 pm (UTC)'!
-withArgumentCount: anArgumentCount andEnvironment: anEnvironmentToPreserve  
-	^self new initializeWithArgumentCount: anArgumentCount andEnvironment: anEnvironmentToPreserve ! !
-
-!IfContinuation methodsFor: 'evaluating' stamp: 'CR 7/Jul/2026, 8:47:17 pm (UTC)'!
-evaluateIn: aMachine
-
-	aMachine continueIf: self .! !
-
-!IfContinuation methodsFor: 'initialization' stamp: 'mm 8/Jul/2026, 12:31:15 pm (UTC)'!
-initalizeWithIfExpression: anIfExpression  
-	
-	ifExpression := anIfExpression ! !
-
-!IfContinuation methodsFor: 'accessing' stamp: 'mm 8/Jul/2026, 12:36:50 pm (UTC)'!
-falseBranch
-	^ifExpression falseBranch! !
-
-!IfContinuation methodsFor: 'accessing' stamp: 'mm 8/Jul/2026, 12:34:11 pm (UTC)'!
-trueBranch
-	^ ifExpression trueBranch! !
-
-!IfContinuation class methodsFor: 'as yet unclassified' stamp: 'mm 8/Jul/2026, 12:29:39 pm (UTC)'!
-withIfExpression: anIfExpression  
-
-	^self new initalizeWithIfExpression: anIfExpression .! !
-
-!LetContinuation methodsFor: 'assertions' stamp: 'mm 8/Jul/2026, 1:10:02 pm (UTC)'!
-finishedBinding
-	^bindIndex = bindsList size! !
-
-!LetContinuation methodsFor: 'initialization' stamp: 'mm 8/Jul/2026, 12:57:26 pm (UTC)'!
-initializeWithBindings: aBindsList body: aBody toBind: aBindIndex andEnvironment: anEnvironmentToPreserve  
-
-	bindsList := aBindsList.
-	body := aBody.
-	bindIndex := aBindIndex.
-	oldEnvironment := anEnvironmentToPreserve .! !
-
-!LetContinuation methodsFor: 'accessing' stamp: 'mm 8/Jul/2026, 1:55:47 pm (UTC)'!
-binds
-
-	^bindsList ! !
-
-!LetContinuation methodsFor: 'accessing' stamp: 'mm 8/Jul/2026, 12:59:19 pm (UTC)'!
-body
-	
-	^body! !
-
-!LetContinuation methodsFor: 'accessing' stamp: 'mm 9/Jul/2026, 11:11:31 pm (UTC)'!
-getVariableToBind
-	^(bindsList at: bindIndex) getVariable ! !
-
-!LetContinuation methodsFor: 'accessing' stamp: 'mm 8/Jul/2026, 9:30:04 pm (UTC)'!
-nextIndex
-	^bindIndex + 1! !
-
-!LetContinuation methodsFor: 'accessing' stamp: 'mm 8/Jul/2026, 1:41:01 pm (UTC)'!
-oldEnvironment
-	
-	^oldEnvironment! !
-
-!LetContinuation methodsFor: 'evaluating' stamp: 'mm 6/Jul/2026, 11:29:47 pm (UTC)'!
-evaluateIn: aMachine
-
-
-	aMachine continueLet: self.! !
-
-!LetContinuation class methodsFor: 'instance creation' stamp: 'mm 8/Jul/2026, 12:56:34 pm (UTC)'!
-withBindings: aBindsList body: aBody toBind: aBindIndex andEnvironment: anEnvironment 
-
-	^self new initializeWithBindings: aBindsList body: aBody toBind: aBindIndex andEnvironment: anEnvironment ! !
-
-!ObserveContinuation methodsFor: 'evaluate' stamp: 'mm 9/Jul/2026, 4:20:08 pm (UTC)'!
-evaluateIn: aMachine 
-	aMachine continueObserve! !
-
-!SampleContinuation methodsFor: 'evaluate' stamp: 'mm 9/Jul/2026, 3:27:24 pm (UTC)'!
-evaluateIn: aMachine 
-	aMachine continueSample! !
-
-!Discard methodsFor: 'evaluating' stamp: 'mm 8/Jul/2026, 10:08:29 pm (UTC)'!
-evaluateIn: aMachine 
-	aMachine visitDiscard.! !
-
-!Expression methodsFor: 'as yet unclassified' stamp: 'mm 8/Jul/2026, 12:19:35 pm (UTC)'!
-evaluateIn: aMachine
-
- 	self subclassResponsibility ! !
-
-!CallExpr methodsFor: 'initialization' stamp: 'CR 4/Jul/2026, 11:21:53 pm (UTC)'!
-initializeWithFunctionName: aFunctionName andArguments: anArgumentList 
-
-	functionName := aFunctionName.
-	argumentList := anArgumentList.! !
-
-!CallExpr methodsFor: 'accessing' stamp: 'mm 6/Jul/2026, 10:53:58 pm (UTC)'!
-arguments
-	^argumentList ! !
-
-!CallExpr methodsFor: 'accessing' stamp: 'mm 6/Jul/2026, 10:53:45 pm (UTC)'!
-name
-	^functionName ! !
-
-!CallExpr methodsFor: 'evaluating' stamp: 'mm 6/Jul/2026, 10:53:15 pm (UTC)'!
-evaluateIn: aMachine 
-	
-	aMachine visitCall: self .
-	! !
-
-!CallExpr class methodsFor: 'as yet unclassified' stamp: 'CR 4/Jul/2026, 11:21:31 pm (UTC)'!
-withFunctionName: aFunctionName andArguments: anArgumentList 
-	^self new initializeWithFunctionName: aFunctionName andArguments: anArgumentList .! !
-
-!FunctionExpr methodsFor: 'as yet unclassified' stamp: 'mm 8/Jul/2026, 10:32:35 pm (UTC)'!
-arguments
-	
-	^arguments! !
-
-!FunctionExpr methodsFor: 'as yet unclassified' stamp: 'mm 8/Jul/2026, 10:32:58 pm (UTC)'!
-body
-	
-	^body! !
-
-!FunctionExpr methodsFor: 'as yet unclassified' stamp: 'mm 8/Jul/2026, 10:22:12 pm (UTC)'!
-evaluateIn: aMachine 
-	aMachine visitFunction: self! !
-
-!FunctionExpr methodsFor: 'as yet unclassified' stamp: 'mm 8/Jul/2026, 10:21:34 pm (UTC)'!
-initializeWithArguments: anArgumentsList andBody: aBody 
-	arguments := anArgumentsList .
-	body := aBody .! !
-
-!FunctionExpr class methodsFor: 'instance creation' stamp: 'mm 8/Jul/2026, 10:20:56 pm (UTC)'!
-withArguments: anArgumentsList andBody: aBody 
-	^self new initializeWithArguments: anArgumentsList andBody: aBody .! !
-
-!IfExpr methodsFor: 'initialization' stamp: 'CR 4/Jul/2026, 9:57:09 pm (UTC)'!
-initializeWithCondition: aConditionToEvaluate ifTrue: aTrueBranch ifFalse: aFalseBranch 
-
-	conditionToEvaluate := aConditionToEvaluate.
-	trueBranch := aTrueBranch.
-	falseBranch := aFalseBranch.! !
-
-!IfExpr methodsFor: 'evaluating' stamp: 'CR 7/Jul/2026, 8:23:57 pm (UTC)'!
-evaluateIn: aMachine 
-
-	aMachine visitIf: self .! !
-
-!IfExpr methodsFor: 'accessing' stamp: 'CR 7/Jul/2026, 8:26:05 pm (UTC)'!
-condition
-
-  ^conditionToEvaluate ! !
-
-!IfExpr methodsFor: 'accessing' stamp: 'CR 7/Jul/2026, 8:25:28 pm (UTC)'!
-falseBranch
-
-	^falseBranch! !
-
-!IfExpr methodsFor: 'accessing' stamp: 'CR 7/Jul/2026, 8:25:11 pm (UTC)'!
-trueBranch
-	^trueBranch! !
-
-!IfExpr class methodsFor: 'as yet unclassified' stamp: 'CR 4/Jul/2026, 9:56:03 pm (UTC)'!
-condition: aConditionToEvaluate ifTrue: trueBranch ifFalse: falseBranch 
-	
-	^self new initializeWithCondition: aConditionToEvaluate ifTrue: trueBranch ifFalse: falseBranch ! !
-
-!LetExpr methodsFor: 'initialization' stamp: 'CR 5/Jul/2026, 12:47:01 am (UTC)'!
-initializeWithBinds: aBindsList andBody: anExpressionsList 
-
-	bindsList := aBindsList.
-	expressionsList := anExpressionsList.! !
-
-!LetExpr methodsFor: 'evaluating' stamp: 'mm 8/Jul/2026, 12:53:28 pm (UTC)'!
-evaluateIn: aMachine 
-	
-	aMachine visitLet: self ! !
-
-!LetExpr methodsFor: 'accessing' stamp: 'mm 8/Jul/2026, 12:53:46 pm (UTC)'!
-binds
-	^bindsList ! !
-
-!LetExpr methodsFor: 'accessing' stamp: 'mm 8/Jul/2026, 12:54:40 pm (UTC)'!
-body
-	^expressionsList ! !
-
-!LetExpr class methodsFor: 'instance creation' stamp: 'CR 5/Jul/2026, 12:46:36 am (UTC)'!
-withBinds: aBindsList andBody: anExpressionsList 
-	
-	^self new initializeWithBinds: aBindsList andBody: anExpressionsList ! !
-
-!LiteralExpr methodsFor: 'evaluating' stamp: 'CR 7/Jul/2026, 8:28:43 pm (UTC)'!
-evaluateIn: aMachine 
-
-	aMachine visitLiteral: self .! !
-
-!LiteralExpr methodsFor: 'initialization' stamp: 'CR 4/Jul/2026, 9:06:35 pm (UTC)'!
-initializeWithValue: aConstantValue  
-	value := aConstantValue! !
-
-!LiteralExpr methodsFor: 'accessing' stamp: 'CR 7/Jul/2026, 8:29:53 pm (UTC)'!
-getValue
-	
-	^value! !
-
-!LiteralExpr class methodsFor: 'instance creation' stamp: 'CR 4/Jul/2026, 9:06:21 pm (UTC)'!
-value: aConstantValue  
-	^self new initializeWithValue: aConstantValue  ! !
-
-!ObserveExpr methodsFor: 'as yet unclassified' stamp: 'mm 9/Jul/2026, 4:16:37 pm (UTC)'!
-evaluateIn: aMachine 
-	aMachine visitObserve: self! !
-
-!ObserveExpr methodsFor: 'as yet unclassified' stamp: 'mm 11/Jul/2026, 3:52:17 pm (UTC)'!
-from: aProbabilityDistribution value: anObservation   
-	distribution := aProbabilityDistribution .
-	observedValue := anObservation ! !
-
-!ObserveExpr methodsFor: 'as yet unclassified' stamp: 'CR 10/Jul/2026, 9:19:03 pm (UTC)'!
-from: aProbabilityDistribution value: anObservation fromMachine: aMachine  
-	distribution := aProbabilityDistribution .
-	observedValue := anObservation ! !
-
-!ObserveExpr methodsFor: 'accessing' stamp: 'mm 9/Jul/2026, 4:19:00 pm (UTC)'!
-distribution
-	
-	^distribution! !
-
-!ObserveExpr methodsFor: 'accessing' stamp: 'mm 9/Jul/2026, 4:18:49 pm (UTC)'!
-observedValue
-	
-	^observedValue! !
-
-!ObserveExpr class methodsFor: 'instance creation' stamp: 'mm 11/Jul/2026, 3:52:17 pm (UTC)'!
-from: aProbabilityDistribution value: anObservation   
-	^self new from: aProbabilityDistribution value: anObservation ! !
-
-!ObserveExpr class methodsFor: 'instance creation' stamp: 'CR 10/Jul/2026, 9:19:03 pm (UTC)'!
-from: aProbabilityDistribution value: anObservation fromMachine: aMachine  
-	^self new from: aProbabilityDistribution value: anObservation fromMachine: self ! !
-
-!SampleExpr methodsFor: 'as yet unclassified' stamp: 'mm 9/Jul/2026, 3:16:52 pm (UTC)'!
-distribution
-	^distribution! !
-
-!SampleExpr methodsFor: 'as yet unclassified' stamp: 'mm 9/Jul/2026, 3:09:09 pm (UTC)'!
-evaluateIn: aMachine 
-	aMachine visitSample: self! !
-
-!SampleExpr methodsFor: 'as yet unclassified' stamp: 'mm 9/Jul/2026, 3:16:52 pm (UTC)'!
-from: aBernoulliProbabilityDistribution 
-	distribution := aBernoulliProbabilityDistribution ! !
-
-!SampleExpr class methodsFor: 'instance creation' stamp: 'mm 9/Jul/2026, 2:57:36 pm (UTC)'!
-from: aProbabilityDistribution 
-	^self new from: aProbabilityDistribution ! !
-
-!VariableExpr methodsFor: 'initialization' stamp: 'CR 4/Jul/2026, 9:30:56 pm (UTC)'!
-initializeWithName: aVariableName 
-
-	name := aVariableName.! !
-
-!VariableExpr methodsFor: 'accessing' stamp: 'mm 7/Jul/2026, 12:12:25 am (UTC)'!
-name
-	^name! !
-
-!VariableExpr methodsFor: 'evaluating' stamp: 'mm 8/Jul/2026, 12:40:02 pm (UTC)'!
-evaluateIn: aMachine 
-
-	aMachine visitVariable: self. 
-	! !
-
-!VariableExpr class methodsFor: 'as yet unclassified' stamp: 'CR 4/Jul/2026, 9:30:19 pm (UTC)'!
-name: aVariableName 
-	^self new initializeWithName: aVariableName .! !
-
-!HOPPLParser methodsFor: 'entry point' stamp: 'mm 7/12/2026 19:33:07'!
+!HOPPLParser methodsFor: 'entry point' stamp: 'mm 7/13/2026 01:17:57'!
 parseProgram: aList
 	"aList: lo que devuelve el parser visto en clase. Puede ser:
 	 - una sola forma (empieza con un Symbol: let/if/sample/observe/fn/una llamada), o
@@ -712,18 +432,8 @@ parseProgram: aList
 			ifTrue: [self registerDefn: form]
 			ifFalse: [mainForms add: (self parseExpr: form)]].
 
-	^Array with: globalEnv with: mainForms
-	"forms := (self isListForm: aList first)
-		ifTrue: [aList]                 ya es una lista de formas top-level
-		ifFalse: [Array with: aList].   aList ES una unica expresion
-
-	mainForms := OrderedCollection new.
-	forms do: [:form |
-		(self isListForm: form) & (form notEmpty) & (form first = #defn)
-			ifTrue: [self registerDefn: form]
-			ifFalse: [mainForms add: (self parseExpr: form)]].
-
-	^Array with: globalEnv with: mainForms"! !
+	^Array with: globalEnv copy with: mainForms
+	! !
 
 !HOPPLParser methodsFor: 'top level' stamp: 'mm 7/12/2026 23:33:38'!
 registerDefn: form
@@ -817,9 +527,9 @@ foldBinaryCall: fnExpr overArguments: argExprs
 		result := CallExpr withFunctionName: fnExpr andArguments: (OrderedCollection with: result with: argExpr)].
 	^result! !
 
-!HOPPLParser methodsFor: 'helpers'!
+!HOPPLParser methodsFor: 'helpers' stamp: 'mm 7/13/2026 01:18:49'!
 isFoldable: aSymbol
-	"operadores variadicos en la sintaxis de origen que tus primitivas solo soportan binarios"
+	"operadores variadicos en la sintaxis de origen que las primitivas solo soportan binarios"
 	^#(#+ #* #- #and #or) includes: aSymbol! !
 
 !HOPPLParser methodsFor: 'helpers'!
@@ -951,27 +661,21 @@ newSample: aDistribution
 
 	^ aDistribution nextRandomNumber! !
 
-!LikelihoodIC methodsFor: 'initialization' stamp: 'mm 7/12/2026 21:02:26'!
+!LikelihoodIC methodsFor: 'initialization' stamp: 'mm 7/13/2026 01:32:26'!
 initializeFor: aProgram andWithEnvironment: anEnvironment  
+
 	program := aProgram copy .
 	logWeight := 0.
 	environment := anEnvironment copy .! !
 
-!LikelihoodIC methodsFor: 'initialization' stamp: 'mm 12/Jul/2026, 9:25:59 pm (UTC)'!
-initializeValuesAndLogWeights
-
-	values := OrderedCollection new.
-	logWeights := OrderedCollection new.
-	! !
-
-!LikelihoodIC methodsFor: 'logWeight' stamp: 'mm 11/Jul/2026, 11:17:05 pm (UTC)'!
+!LikelihoodIC methodsFor: 'logWeight' stamp: 'mm 7/13/2026 01:36:21'!
 computeLogWeight: observeNotification
 
 	| distribution obs |
-			distribution := observeNotification distribution.
-			obs := observeNotification observedValue.
-			logWeight := logWeight + (distribution logProbability: obs).
-			! !
+	
+	distribution := observeNotification distribution.
+	obs := observeNotification observedValue.
+	! !
 
 !LikelihoodIC methodsFor: 'handling' stamp: 'CR 10/Jul/2026, 8:44:32 pm (UTC)'!
 handleObservation: observeNotification
@@ -979,10 +683,11 @@ handleObservation: observeNotification
 	self computeLogWeight: observeNotification.
 	observeNotification resume: observeNotification observedValue ! !
 
-!LikelihoodIC methodsFor: 'handling' stamp: 'mm 11/Jul/2026, 11:21:58 pm (UTC)'!
+!LikelihoodIC methodsFor: 'handling' stamp: 'mm 7/13/2026 01:36:28'!
 handleSample: sampleNotification
 
 	|newSample|
+	
 	newSample:= self newSample: sampleNotification distribution.
 	sampleNotification resume: newSample! !
 
@@ -991,54 +696,44 @@ newSample: aDistribution
 
 	^ aDistribution nextRandomNumber! !
 
-!LikelihoodIC methodsFor: 'sample' stamp: 'mm 12/Jul/2026, 9:24:35 pm (UTC)'!
+!LikelihoodIC methodsFor: 'run' stamp: 'mm 7/13/2026 00:50:39'!
+run
+	
+	self run: 1.
+	
+	! !
+
+!LikelihoodIC methodsFor: 'run' stamp: 'mm 7/13/2026 01:32:44'!
 run: numberOfIterations
-	| machine result nResults|
+
+	| machine result nResults values logWeights|
+	
 	nResults := OrderedCollection new.
-	self initializeValuesAndLogWeights.
+	values := OrderedCollection new.
+	logWeights := OrderedCollection new.
 	
 	numberOfIterations timesRepeat:[
-		logWeight := 0.
-		machine := Machine withControlStack: program copy environment: Dictionary new.
+		
+		machine := Machine withControlStack: program copy environment: environment copy.
 		
 		result := [machine resume] 
-		on: SampleNotification do: 
-				[:sampleNotification|
-					self handleSample: sampleNotification .
-		] on: ObserveNotification do: 
-				[:observeNotification|
-					self handleObservation: observeNotification.
-		] on: DoneNotification do:
-				[:doneNotification|
-					values add: doneNotification result.
-					logWeights add: doneNotification machine logWeight.
-		].
+			on: SampleNotification do: 
+					[:sampleNotification|
+						self handleSample: sampleNotification .
+			] on: ObserveNotification do: 
+					[:observeNotification|
+						self handleObservation: observeNotification.
+			] on: DoneNotification do:
+					[:doneNotification|
+						values add: doneNotification result.
+						logWeights add: doneNotification machine logWeight.
+			].
 	].
 	logWeights := logWeights softmax.
 	nResults add: values .
 	nResults add: logWeights.
 	^nResults
-		"^{result. {'log weight:' .logWeight} }"! !
-
-!LikelihoodIC methodsFor: 'run' stamp: 'mm 7/12/2026 21:03:16'!
-run
-	| machine |
-	
-	machine := Machine withControlStack: program copy environment: environment copy.
-	
-	[machine resume] 
-	on: DoneNotification do:[
-		:doneNotifcation | ^{doneNotifcation result. {'log weight:' . doneNotifcation machine logWeight} }
-		]
-	on: SampleNotification do: 
-			[:sampleNotification|
-				self handleSample: sampleNotification.
-	] on: ObserveNotification do:
-			[:observeNotification|
-				self handleObservation: observeNotification.
-	].
-		
-		! !
+	! !
 
 !LikelihoodIC class methodsFor: 'instance creation' stamp: 'mm 7/12/2026 21:01:43'!
 for: aParsedProgram 
@@ -1058,36 +753,25 @@ chooseAddressToResampleFrom: cacheDict
 
 	^ cacheDict keys at: ( rng nextInteger: cacheDict size)! !
 
-!SSMetropolisHastingsIC methodsFor: 'resample' stamp: 'mm 12/Jul/2026, 12:10:02 am (UTC)'!
+!SSMetropolisHastingsIC methodsFor: 'resample' stamp: 'mm 7/13/2026 01:06:03'!
 runResample: anAddress withCache: aCache 
 
-	| observeLogProbs sampleLogProbs  machine x |
+	|    machine  |
 	
 	sampleLogProbs := IdentityDictionary new.
 	observeLogProbs := IdentityDictionary new. 
-	machine := Machine withControlStack: programStack copy.
-	x := IdentityDictionary new.
+	machine := Machine withControlStack: programStack copy environment: environment copy.
+	trace := IdentityDictionary new.
 	
 	[machine resume] 
 		on: SampleNotification do: 
-			[:sampleNotification | | newSample |
-				((self currentAddress: sampleNotification isTheOneToResample: anAddress) or: [self address: sampleNotification notIn: aCache]) 
-				ifTrue: 
-					[newSample := self newSample: sampleNotification distribution.]
-				ifFalse:
-					[newSample := aCache at: sampleNotification ].
-				x at: sampleNotification put: newSample. 
-				self recordLogProbOf: newSample in: sampleLogProbs at: sampleNotification .
-				sampleNotification resume: newSample.
+			[:sampleNotification | self handleSample: sampleNotification resampling: anAddress withCache: aCache.
 			]
 		on: ObserveNotification do:
-			[:observeNotification | |observedValue|
-				observedValue := observeNotification observedValue .
-				self recordLogProbOf: observedValue in: observeLogProbs at: observeNotification .
-				observeNotification resume: observedValue .] 
+			[:observeNotification | self handleObservation: observeNotification .] 
 		on: DoneNotification do: 
 			[:doneNotification | 
-				^{doneNotification result. x. sampleLogProbs. observeLogProbs}].
+				^self handleDone: doneNotification].
 		
 	! !
 
@@ -1096,9 +780,11 @@ computeLogProbabilityOf: anEvent from: aDistribution
 
 	^ aDistribution logProbability: anEvent! !
 
-!SSMetropolisHastingsIC methodsFor: 'logProbability' stamp: 'mm 11/Jul/2026, 11:32:53 pm (UTC)'!
+!SSMetropolisHastingsIC methodsFor: 'logProbability' stamp: 'mm 7/13/2026 01:34:59'!
 recordLogProbOf: anEvent in: aCollectionOfLogProbs at: aKey
+
 	| distribution |
+	
 	distribution := aKey distribution.
 	aCollectionOfLogProbs at: aKey put: (distribution logProbability: anEvent).! !
 
@@ -1112,45 +798,19 @@ currentAddress: sampleNotification isTheOneToResample: anAddress
 
 	^ sampleNotification == anAddress! !
 
-!SSMetropolisHastingsIC methodsFor: 'run' stamp: 'mm 7/12/2026 23:29:57'!
+!SSMetropolisHastingsIC methodsFor: 'run' stamp: 'mm 7/13/2026 01:33:00'!
 firstRun
-	| observeLogProbs sampleLogProbs machine traces |
 	
-	traces := IdentityDictionary new.
-	sampleLogProbs := IdentityDictionary new.
-	observeLogProbs := IdentityDictionary new. 
-	machine := Machine withControlStack: programStack copy environment: environment copy.
+	^self runResample: nil withCache: IdentityDictionary new.
 	
-	[machine resume] 
-		on: SampleNotification do: 
-			[:sampleNotification | 
-				| newSample distribution |
-				distribution := sampleNotification distribution.
-				newSample := self newSample: distribution.
-				
-				traces at: sampleNotification put: newSample.
-				self recordLogProbOf: newSample in: sampleLogProbs at: sampleNotification.
-				
-				sampleNotification resume: newSample.
-			]
-		on: ObserveNotification do:
-			[:observeNotification | |observedValue|
-				observedValue:=observeNotification observedValue .
-				self recordLogProbOf: observedValue in: observeLogProbs at: observeNotification .
-				observeNotification resume: observedValue.
-			] 
-		on: DoneNotification do: [:doneNotification | 
-				^{doneNotification result. traces. sampleLogProbs. observeLogProbs}
-			].
-		
 	! !
 
-!SSMetropolisHastingsIC methodsFor: 'run' stamp: 'mm 12/Jul/2026, 3:37:08 pm (UTC)'!
+!SSMetropolisHastingsIC methodsFor: 'run' stamp: 'mm 7/13/2026 01:35:58'!
 runSteps: numSteps
 
 	|cacheDict addressToResample acceptanceRatio oldRun newRun results |
 	
-	 oldRun := self firstRun. 
+	oldRun := self firstRun. 
 	results:= OrderedCollection new. 
 
 	numSteps timesRepeat: [
@@ -1168,11 +828,12 @@ runSteps: numSteps
 
 ! !
 
-!SSMetropolisHastingsIC methodsFor: 'acceptanceRatio' stamp: 'mm 12/Jul/2026, 3:37:08 pm (UTC)'!
+!SSMetropolisHastingsIC methodsFor: 'acceptanceRatio' stamp: 'mm 7/13/2026 01:35:44'!
 logAcceptanceRatioWithCurrentTrace: anOldRun proposedTrace: aNewRun andResampled: anAddress
+
 | proposedChanges discardedChanges numerator denominator currentTrace proposedTrace currentSampleProbs proposedSampleProbs currentObserveProbs proposedObserveProbs |
 
-    	currentTrace := anOldRun second.
+	currentTrace := anOldRun second.
 	proposedTrace := aNewRun second.
 	currentSampleProbs := anOldRun third.
 	proposedSampleProbs := aNewRun third.
@@ -1183,27 +844,56 @@ logAcceptanceRatioWithCurrentTrace: anOldRun proposedTrace: aNewRun andResampled
 	proposedChanges add: anAddress.
     	discardedChanges := self setDifferenceBetween: currentTrace and: proposedTrace.
 	discardedChanges add: anAddress.
-   
-    numerator := (proposedSampleProbs associations
-                inject: 0 into: [:acc :assoc |
-                    (proposedChanges includes: assoc key)
-                        ifTrue: [acc]
-                        ifFalse: [acc + assoc value]])
-           + (proposedObserveProbs values inject: 0 into: [:a :b | a + b]).
+	   
+	numerator := (proposedSampleProbs associations
+	            inject: 0 into: [:acc :assoc |
+	                (proposedChanges includes: assoc key)
+	                    ifTrue: [acc]
+	                    ifFalse: [acc + assoc value]])
+	        + (proposedObserveProbs values inject: 0 into: [:a :b | a + b]).
 
-    denominator := (currentSampleProbs associations
-                inject: 0 into: [:acc :assoc |
-                    (discardedChanges includes: assoc key)
-                        ifTrue: [acc]
-                        ifFalse: [acc + assoc value]])
-           + (currentObserveProbs values inject: 0 into: [:a :b | a + b]).
+	denominator := (currentSampleProbs associations
+	            inject: 0 into: [:acc :assoc |
+	                (discardedChanges includes: assoc key)
+	                    ifTrue: [acc]
+	                    ifFalse: [acc + assoc value]])
+	        + (currentObserveProbs values inject: 0 into: [:a :b | a + b]).
 
-    ^(currentTrace size ln - proposedTrace size ln) + (numerator - denominator)! !
+	^(currentTrace size ln - proposedTrace size ln) + (numerator - denominator)! !
 
 !SSMetropolisHastingsIC methodsFor: 'acceptanceRatio' stamp: 'mm 12/Jul/2026, 3:29:42 pm (UTC)'!
 setDifferenceBetween: aTrace and: anotherTrace
 
 	^ aTrace keys asSet collect: [:aKey| (anotherTrace keys includes: aKey)not]! !
+
+!SSMetropolisHastingsIC methodsFor: 'handling' stamp: 'mm 7/13/2026 01:06:03'!
+handleDone: doneNotification
+
+	^ {doneNotification result. trace. sampleLogProbs. observeLogProbs}! !
+
+!SSMetropolisHastingsIC methodsFor: 'handling' stamp: 'mm 7/13/2026 01:33:18'!
+handleObservation: observeNotification
+
+	|observedValue|
+	
+	observedValue := observeNotification observedValue .
+	self recordLogProbOf: observedValue in: observeLogProbs at: observeNotification .
+	observeNotification resume: observedValue! !
+
+!SSMetropolisHastingsIC methodsFor: 'handling' stamp: 'mm 7/13/2026 01:33:40'!
+handleSample: sampleNotification resampling: anAddress withCache: aCache
+
+	| newSample |
+	
+	((self currentAddress: sampleNotification isTheOneToResample: anAddress) or: [self address: sampleNotification notIn: aCache]) 
+	ifTrue: 
+		[newSample := self newSample: sampleNotification distribution.]
+	ifFalse:
+		[newSample := aCache at: sampleNotification ].
+		
+	trace at: sampleNotification put: newSample. 
+	self recordLogProbOf: newSample in: sampleLogProbs at: sampleNotification .
+	sampleNotification resume: newSample! !
 
 !SSMetropolisHastingsIC methodsFor: 'as yet unclassified' stamp: 'mm 11/Jul/2026, 11:43:47 pm (UTC)'!
 keys: traces
@@ -1222,13 +912,13 @@ initializeFor: aProgram andWithEnvironment: anEnvironment
 	randomGen:= Random new .
 	environment := anEnvironment copy.! !
 
-!SequentialMCIC methodsFor: 'run' stamp: 'mm 7/12/2026 23:30:16'!
+!SequentialMCIC methodsFor: 'run' stamp: 'mm 7/13/2026 01:37:34'!
 createParticles: numParticles
 
 	^ (1 to: numParticles) collect: [:i |
-        Machine withControlStack: program copy environment: environment copy]! !
+	        Machine withControlStack: program copy environment: environment copy]! !
 
-!SequentialMCIC methodsFor: 'run' stamp: 'mm 12/Jul/2026, 12:35:37 am (UTC)'!
+!SequentialMCIC methodsFor: 'run' stamp: 'mm 7/13/2026 01:38:15'!
 run:  numParticles
 	|particles messages logIncs paused weights ancestors |
 
@@ -1242,7 +932,7 @@ run:  numParticles
 
         		logIncs := self collectLogIncs: messages.
         		paused := self getPausedMachines: messages.
-        		paused with: messages do: [:particle :notification | particle pushValue: notification observedValue ]. "y de vuelta"
+        		paused with: messages do: [:particle :notification | particle pushValue: notification observedValue ]. 
 
         		weights := self normalizedProbabilitiesFrom: logIncs .
         		ancestors := self resampleIndicesFor: weights count: numParticles.
@@ -1256,10 +946,13 @@ rng
 
 	^randomGen ! !
 
-!SequentialMCIC methodsFor: 'probability' stamp: 'mm 12/Jul/2026, 12:29:30 am (UTC)'!
+!SequentialMCIC methodsFor: 'probability' stamp: 'mm 7/13/2026 01:37:18'!
 collectLogIncs: messages
 
-	^ messages collect: [:notification | |value| value:= (notification distribution) logProbability: notification observedValue. notification machine addLogWeight: value. value]! !
+	^ messages collect: [:notification | |value| 
+		value:= (notification distribution) logProbability: notification observedValue. 
+		notification machine addLogWeight: value. 
+		value]! !
 
 !SequentialMCIC methodsFor: 'probability' stamp: 'mm 12/Jul/2026, 12:33:49 am (UTC)'!
 normalizedProbabilitiesFrom: logIncs
@@ -1295,10 +988,11 @@ advanceParticles: particles
 
 	^ particles collect: [:p | self advanceParticle: p]! !
 
-!SequentialMCIC methodsFor: 'handling' stamp: 'mm 12/Jul/2026, 3:48:54 pm (UTC)'!
+!SequentialMCIC methodsFor: 'handling' stamp: 'mm 7/13/2026 01:37:40'!
 handleSample: sampleNotification
 
 	|newSample|
+	
 	newSample:= self newSample: sampleNotification distribution.
 	sampleNotification resume: newSample! !
 
@@ -1312,39 +1006,40 @@ getPausedMachines: messages
 
 	^ messages collect: [:notification | notification machine]! !
 
-!SequentialMCIC methodsFor: 'resample' stamp: 'mm 11/Jul/2026, 2:58:52 pm (UTC)'!
+!SequentialMCIC methodsFor: 'resample' stamp: 'mm 7/13/2026 01:38:03'!
 resampleIndicesFor: weights count: numberOfParticles 
 
-    | cum acc |
-    acc := 0.
-    cum := weights collect: [:w | acc := acc + w. acc].
-    ^(1 to: numberOfParticles ) collect: [:j |
-        | u | u := self rng next.
-        (1 to: cum size) detect: [:i | (cum at: i) >= u] ifNone:[1]	] ! !
+	| cum acc |
+	acc := 0.
+	cum := weights collect: [:w | acc := acc + w. acc].
+	^(1 to: numberOfParticles ) collect: [:j |
+	    | u | u := self rng next.
+	    (1 to: cum size) detect: [:i | (cum at: i) >= u] ifNone:[1]	] ! !
 
 !SequentialMCIC class methodsFor: 'instance creation' stamp: 'mm 7/12/2026 23:18:08'!
 for: aParsedProgram 
 	
 	^self new initializeFor: aParsedProgram second andWithEnvironment: aParsedProgram first  ! !
 
-!Machine methodsFor: 'continuation' stamp: 'mm 7/12/2026 23:05:18'!
+!Machine methodsFor: 'continuation' stamp: 'mm 7/13/2026 01:38:48'!
 continueCall: aCallContinuation 
-    | args function |
-    args := OrderedCollection new.
-    aCallContinuation argCount timesRepeat: [args add: valueStack removeLast].
-    args := args reverse asArray.
-    function := valueStack removeLast.
 
-    (function isKindOf: Closure)
-        ifTrue: [
-            controlStack add: (RestoreEnvironment from: aCallContinuation).
-            environment := function environment copy.
-            function parameters with: args do: [:param :arg | environment at: param name put: arg].
-            self pushBody: function body copy]
-        ifFalse: [valueStack add: (function valueWithArguments: args)]
+	| args function |
+	
+	args := OrderedCollection new.
+	aCallContinuation argCount timesRepeat: [args add: valueStack removeLast].
+	args := args reverse asArray.
+	function := valueStack removeLast.
 
+	(function isKindOf: Closure)
+	    ifTrue: [
+	        controlStack add: (RestoreEnvironment from: aCallContinuation).
+	        environment := function environment copy.
+	        function parameters with: args do: [:param :arg | environment at: param name put: arg].
+	        self pushBody: function body copy]
+	    ifFalse: [valueStack add: (function valueWithArguments: args)]
 
-    "#+ - > Primitive: #+ "! !
+! !
 
 !Machine methodsFor: 'continuation' stamp: 'CR 7/Jul/2026, 8:46:28 pm (UTC)'!
 continueIf: anIfContinuation  
@@ -1356,9 +1051,11 @@ continueIf: anIfContinuation
 	evaluatedCondition ifTrue: [controlStack add:anIfContinuation trueBranch  ] 
 						ifFalse: [controlStack add: anIfContinuation falseBranch]! !
 
-!Machine methodsFor: 'continuation' stamp: 'mm 9/Jul/2026, 11:11:46 pm (UTC)'!
+!Machine methodsFor: 'continuation' stamp: 'mm 7/13/2026 01:39:05'!
 continueLet: aLetContinuation 
+
 	| evaluatedExpression varToBind body newLetContinuation updatedIndex |
+	
 	evaluatedExpression := valueStack removeLast.
 	varToBind := aLetContinuation getVariableToBind name.
 	
@@ -1383,8 +1080,9 @@ continueLet: aLetContinuation
 	
 	! !
 
-!Machine methodsFor: 'continuation' stamp: 'mm 11/Jul/2026, 3:56:55 pm (UTC)'!
+!Machine methodsFor: 'continuation' stamp: 'mm 7/13/2026 01:39:14'!
 continueObserve
+
 	| distribution observedValue value |
 	
 	observedValue := valueStack removeLast.
@@ -1393,9 +1091,11 @@ continueObserve
 	value := (ObserveNotification from: distribution value: observedValue fromMachine: self ) signal.
 	valueStack add: value.! !
 
-!Machine methodsFor: 'continuation' stamp: 'mm 9/Jul/2026, 3:29:07 pm (UTC)'!
+!Machine methodsFor: 'continuation' stamp: 'mm 7/13/2026 01:39:21'!
 continueSample
+
 	| distribution newSample |
+	
 	distribution := valueStack removeLast.
 	newSample := (SampleNotification from: distribution) signal .
 	
@@ -1415,8 +1115,9 @@ initializeWithControlStack: aControlStack environment: anEnvironment
 	logWeight :=0.0
 	! !
 
-!Machine methodsFor: 'resume' stamp: 'CR 10/Jul/2026, 11:15:11 pm (UTC)'!
+!Machine methodsFor: 'resume' stamp: 'mm 7/13/2026 01:39:59'!
 resume
+
 	|  instruction result |
 	
 	[controlStack notEmpty] whileTrue: [
@@ -1433,12 +1134,14 @@ environment
 	
 	^environment! !
 
-!Machine methodsFor: 'environment' stamp: 'mm 8/Jul/2026, 1:41:36 pm (UTC)'!
+!Machine methodsFor: 'environment' stamp: 'mm 7/13/2026 01:39:53'!
 restoreEnvironment: environmentToRestore 
+
 	environment := environmentToRestore ! !
 
-!Machine methodsFor: 'rng' stamp: 'mm 11/Jul/2026, 4:28:25 pm (UTC)'!
+!Machine methodsFor: 'rng' stamp: 'mm 7/13/2026 01:39:36'!
 forkWithRng: aRng
+
     | new |
 
 	new := Machine withControlStack: controlStack copy environment: environment copy.
@@ -1446,7 +1149,7 @@ forkWithRng: aRng
 	new setRng: aRng. 
 	new addLogWeight: logWeight .
   
-  ^new! !
+	^new! !
 
 !Machine methodsFor: 'rng' stamp: 'CR 10/Jul/2026, 11:58:42 pm (UTC)'!
 setRng: aRng 
@@ -1463,45 +1166,39 @@ logWeight
 
 	^logWeight ! !
 
-!Machine methodsFor: 'visit' stamp: 'mm 12/Jul/2026, 9:17:15 pm (UTC)'!
+!Machine methodsFor: 'visit' stamp: 'mm 7/13/2026 01:40:26'!
 visitCall: aCallExpression 
-    |argList|
 
-    argList := aCallExpression arguments.
-    controlStack add: (CallContinuation withArgumentCount: argList size andEnvironment: environment) .
-    [ argList notEmpty] whileTrue:
-         [controlStack add: (argList removeLast).].
-	
-    controlStack add: aCallExpression name.! !
+	|argList|
 
-!Machine methodsFor: 'visit' stamp: 'mm 8/Jul/2026, 10:09:00 pm (UTC)'!
+	argList := aCallExpression arguments.
+	controlStack add: (CallContinuation withArgumentCount: argList size andEnvironment: environment) .
+	[ argList notEmpty] whileTrue:
+	     [controlStack add: (argList removeLast).].
+
+	controlStack add: aCallExpression name.! !
+
+!Machine methodsFor: 'visit' stamp: 'mm 7/13/2026 01:40:33'!
 visitDiscard
+
 	valueStack removeLast.! !
 
-!Machine methodsFor: 'visit' stamp: 'mm 9/Jul/2026, 3:26:23 pm (UTC)'!
+!Machine methodsFor: 'visit' stamp: 'mm 7/13/2026 01:40:37'!
 visitDistribution: aProbabilityDistribution 
+
 	valueStack add: aProbabilityDistribution ! !
 
-!Machine methodsFor: 'visit' stamp: 'mm 12/Jul/2026, 8:28:08 pm (UTC)'!
+!Machine methodsFor: 'visit' stamp: 'mm 7/13/2026 01:41:03'!
 visitFunction: aFunctionExpr 
-    | arguments  closure |
 
-    arguments := aFunctionExpr arguments.
+	| arguments  closure |
 
-    closure:= Closure withParameters: arguments body: aFunctionExpr body andEnvironment: environment copy. 
+	arguments := aFunctionExpr arguments.
 
-    valueStack add: closure
+	closure:= Closure withParameters: arguments body: aFunctionExpr body andEnvironment: environment copy. 
 
-    "
-    let (f (fn [x] [x+2] )) (f 3)
-
-    letexpr (bind (Variable f) (functionexpr [varibele x] [varible +. varible x. literal 2.]) ) (calleexpr withname f parms 3 )
-
-    fn [x] [x=3] 2
-
-    functionexpr [variable x] [x=3] . literal 2
-
-    "! !
+	valueStack add: closure
+! !
 
 !Machine methodsFor: 'visit' stamp: 'mm 8/Jul/2026, 12:29:19 pm (UTC)'!
 visitIf: anIfExpression  
@@ -1534,38 +1231,40 @@ visitLet: aLetExpression
 	
 	! !
 
-!Machine methodsFor: 'visit' stamp: 'CR 7/Jul/2026, 8:28:15 pm (UTC)'!
+!Machine methodsFor: 'visit' stamp: 'mm 7/13/2026 01:41:13'!
 visitLiteral: aLiteralExpr 
+
 	valueStack add: aLiteralExpr getValue ! !
 
-!Machine methodsFor: 'visit' stamp: 'mm 9/Jul/2026, 4:18:27 pm (UTC)'!
+!Machine methodsFor: 'visit' stamp: 'mm 7/13/2026 01:41:20'!
 visitObserve: anObserveExpr 
+
 	controlStack add: ObserveContinuation new.
 	controlStack add: anObserveExpr observedValue.
 	controlStack add: anObserveExpr distribution.! !
 
-!Machine methodsFor: 'visit' stamp: 'mm 9/Jul/2026, 3:15:38 pm (UTC)'!
+!Machine methodsFor: 'visit' stamp: 'mm 7/13/2026 01:41:26'!
 visitSample: aSampleExpr 
+
 	controlStack add: SampleContinuation new.
 	controlStack add: aSampleExpr distribution.! !
 
-!Machine methodsFor: 'visit' stamp: 'mm 8/Jul/2026, 12:41:25 pm (UTC)'!
+!Machine methodsFor: 'visit' stamp: 'mm 7/13/2026 01:41:48'!
 visitVariable: aVariable
  
 	| value variableName |
-	"le paso self en vez de name"
+	
 	variableName := aVariable name.
 	(environment includesKey:variableName ) 
-		ifTrue: [value:= environment at:variableName .] 
-		ifFalse: [].
-
-	
+		ifTrue: [value:= environment at:variableName .] .
+		
 	valueStack add: value.
 		
 	! !
 
-!Machine methodsFor: 'valueStack' stamp: 'CR 10/Jul/2026, 11:40:37 pm (UTC)'!
+!Machine methodsFor: 'valueStack' stamp: 'mm 7/13/2026 01:39:48'!
 pushValue: aValue 
+
 	valueStack add:aValue ! !
 
 !Machine methodsFor: 'valueStack' stamp: 'CR 10/Jul/2026, 11:58:20 pm (UTC)'!
@@ -1573,8 +1272,9 @@ setValueStack: aValueStack
 
 	valueStack := aValueStack! !
 
-!Machine methodsFor: 'pushBody' stamp: 'mm 8/Jul/2026, 10:07:04 pm (UTC)'!
+!Machine methodsFor: 'pushBody' stamp: 'mm 7/13/2026 01:39:44'!
 pushBody: body
+
 	controlStack add: body removeLast.
 	body reverse do: [:instruction|
 		controlStack add: Discard new.
@@ -1588,41 +1288,391 @@ withControlStack: aControlStack
 withControlStack: aControlStack environment: anEnvironment  
 	^self new initializeWithControlStack: aControlStack copy environment: anEnvironment copy! !
 
-!ProbabilityDistribution methodsFor: 'accessing' stamp: 'mm 9/Jul/2026, 3:25:31 pm (UTC)'!
+!MachineInstruction methodsFor: 'as yet unclassified' stamp: 'mm 7/13/2026 01:15:54'!
 evaluateIn: aMachine
+	self subclassResponsibility ! !
+
+!Continuation methodsFor: 'evaluate' stamp: 'CR 5/Jul/2026, 1:21:38 am (UTC)'!
+evaluateIn: aMachine
+
+	self subclassResponsibility 
+
+! !
+
+!CallContinuation methodsFor: 'evaluating' stamp: 'mm 7/13/2026 01:42:36'!
+evaluateIn: aMachine 
+
+	aMachine continueCall: self! !
+
+!CallContinuation methodsFor: 'initialization' stamp: 'mm 7/13/2026 01:42:42'!
+initializeWithArgumentCount: anArgumentCount andEnvironment: anEnvironmentToPreserve 
+ 
+	argCount := anArgumentCount .
+	oldEnvironment := anEnvironmentToPreserve .! !
+
+!CallContinuation methodsFor: 'accessing' stamp: 'mm 7/13/2026 01:42:24'!
+argCount
+
+	^argCount ! !
+
+!CallContinuation methodsFor: 'accessing' stamp: 'mm 7/13/2026 01:42:30'!
+oldEnvironment
+
+	^oldEnvironment ! !
+
+!CallContinuation class methodsFor: 'as yet unclassified' stamp: 'mm 12/Jul/2026, 9:17:15 pm (UTC)'!
+withArgumentCount: anArgumentCount andEnvironment: anEnvironmentToPreserve  
+	^self new initializeWithArgumentCount: anArgumentCount andEnvironment: anEnvironmentToPreserve ! !
+
+!IfContinuation methodsFor: 'evaluating' stamp: 'CR 7/Jul/2026, 8:47:17 pm (UTC)'!
+evaluateIn: aMachine
+
+	aMachine continueIf: self .! !
+
+!IfContinuation methodsFor: 'initialization' stamp: 'mm 8/Jul/2026, 12:31:15 pm (UTC)'!
+initalizeWithIfExpression: anIfExpression  
+	
+	ifExpression := anIfExpression ! !
+
+!IfContinuation methodsFor: 'accessing' stamp: 'mm 7/13/2026 01:42:49'!
+falseBranch
+
+	^ifExpression falseBranch! !
+
+!IfContinuation methodsFor: 'accessing' stamp: 'mm 7/13/2026 01:42:56'!
+trueBranch
+
+	^ ifExpression trueBranch! !
+
+!IfContinuation class methodsFor: 'as yet unclassified' stamp: 'mm 8/Jul/2026, 12:29:39 pm (UTC)'!
+withIfExpression: anIfExpression  
+
+	^self new initalizeWithIfExpression: anIfExpression .! !
+
+!LetContinuation methodsFor: 'assertions' stamp: 'mm 7/13/2026 01:43:12'!
+finishedBinding
+
+	^bindIndex = bindsList size! !
+
+!LetContinuation methodsFor: 'initialization' stamp: 'mm 8/Jul/2026, 12:57:26 pm (UTC)'!
+initializeWithBindings: aBindsList body: aBody toBind: aBindIndex andEnvironment: anEnvironmentToPreserve  
+
+	bindsList := aBindsList.
+	body := aBody.
+	bindIndex := aBindIndex.
+	oldEnvironment := anEnvironmentToPreserve .! !
+
+!LetContinuation methodsFor: 'accessing' stamp: 'mm 8/Jul/2026, 1:55:47 pm (UTC)'!
+binds
+
+	^bindsList ! !
+
+!LetContinuation methodsFor: 'accessing' stamp: 'mm 8/Jul/2026, 12:59:19 pm (UTC)'!
+body
+	
+	^body! !
+
+!LetContinuation methodsFor: 'accessing' stamp: 'mm 7/13/2026 01:43:15'!
+getVariableToBind
+
+	^(bindsList at: bindIndex) getVariable ! !
+
+!LetContinuation methodsFor: 'accessing' stamp: 'mm 7/13/2026 01:43:22'!
+nextIndex
+
+	^bindIndex + 1! !
+
+!LetContinuation methodsFor: 'accessing' stamp: 'mm 8/Jul/2026, 1:41:01 pm (UTC)'!
+oldEnvironment
+	
+	^oldEnvironment! !
+
+!LetContinuation methodsFor: 'evaluating' stamp: 'mm 7/13/2026 01:43:07'!
+evaluateIn: aMachine
+
+	aMachine continueLet: self.! !
+
+!LetContinuation class methodsFor: 'instance creation' stamp: 'mm 8/Jul/2026, 12:56:34 pm (UTC)'!
+withBindings: aBindsList body: aBody toBind: aBindIndex andEnvironment: anEnvironment 
+
+	^self new initializeWithBindings: aBindsList body: aBody toBind: aBindIndex andEnvironment: anEnvironment ! !
+
+!ObserveContinuation methodsFor: 'evaluate' stamp: 'mm 7/13/2026 01:43:31'!
+evaluateIn: aMachine 
+
+	aMachine continueObserve! !
+
+!SampleContinuation methodsFor: 'evaluate' stamp: 'mm 7/13/2026 01:43:37'!
+evaluateIn: aMachine 
+
+	aMachine continueSample! !
+
+!Discard methodsFor: 'evaluating' stamp: 'mm 7/13/2026 01:43:41'!
+evaluateIn: aMachine 
+
+	aMachine visitDiscard.! !
+
+!Expression methodsFor: 'as yet unclassified' stamp: 'mm 8/Jul/2026, 12:19:35 pm (UTC)'!
+evaluateIn: aMachine
+
+ 	self subclassResponsibility ! !
+
+!CallExpr methodsFor: 'initialization' stamp: 'CR 4/Jul/2026, 11:21:53 pm (UTC)'!
+initializeWithFunctionName: aFunctionName andArguments: anArgumentList 
+
+	functionName := aFunctionName.
+	argumentList := anArgumentList.! !
+
+!CallExpr methodsFor: 'accessing' stamp: 'mm 7/13/2026 01:43:51'!
+arguments
+
+	^argumentList copy! !
+
+!CallExpr methodsFor: 'accessing' stamp: 'mm 7/13/2026 01:43:57'!
+name
+
+	^functionName ! !
+
+!CallExpr methodsFor: 'evaluating' stamp: 'mm 6/Jul/2026, 10:53:15 pm (UTC)'!
+evaluateIn: aMachine 
+	
+	aMachine visitCall: self .
+	! !
+
+!CallExpr class methodsFor: 'as yet unclassified' stamp: 'CR 4/Jul/2026, 11:21:31 pm (UTC)'!
+withFunctionName: aFunctionName andArguments: anArgumentList 
+	^self new initializeWithFunctionName: aFunctionName andArguments: anArgumentList .! !
+
+!FunctionExpr methodsFor: 'as yet unclassified' stamp: 'mm 7/13/2026 00:15:01'!
+arguments
+	
+	^arguments copy! !
+
+!FunctionExpr methodsFor: 'as yet unclassified' stamp: 'mm 7/13/2026 00:15:06'!
+body
+	
+	^body copy! !
+
+!FunctionExpr methodsFor: 'as yet unclassified' stamp: 'mm 7/13/2026 01:44:12'!
+evaluateIn: aMachine 
+
+	aMachine visitFunction: self! !
+
+!FunctionExpr methodsFor: 'as yet unclassified' stamp: 'mm 7/13/2026 01:44:05'!
+initializeWithArguments: anArgumentsList andBody: aBody 
+
+	arguments := anArgumentsList .
+	body := aBody .! !
+
+!FunctionExpr class methodsFor: 'instance creation' stamp: 'mm 8/Jul/2026, 10:20:56 pm (UTC)'!
+withArguments: anArgumentsList andBody: aBody 
+	^self new initializeWithArguments: anArgumentsList andBody: aBody .! !
+
+!IfExpr methodsFor: 'initialization' stamp: 'CR 4/Jul/2026, 9:57:09 pm (UTC)'!
+initializeWithCondition: aConditionToEvaluate ifTrue: aTrueBranch ifFalse: aFalseBranch 
+
+	conditionToEvaluate := aConditionToEvaluate.
+	trueBranch := aTrueBranch.
+	falseBranch := aFalseBranch.! !
+
+!IfExpr methodsFor: 'evaluating' stamp: 'CR 7/Jul/2026, 8:23:57 pm (UTC)'!
+evaluateIn: aMachine 
+
+	aMachine visitIf: self .! !
+
+!IfExpr methodsFor: 'accessing' stamp: 'mm 7/13/2026 01:44:22'!
+condition
+
+	^conditionToEvaluate ! !
+
+!IfExpr methodsFor: 'accessing' stamp: 'CR 7/Jul/2026, 8:25:28 pm (UTC)'!
+falseBranch
+
+	^falseBranch! !
+
+!IfExpr methodsFor: 'accessing' stamp: 'mm 7/13/2026 01:44:29'!
+trueBranch
+
+	^trueBranch! !
+
+!IfExpr class methodsFor: 'as yet unclassified' stamp: 'CR 4/Jul/2026, 9:56:03 pm (UTC)'!
+condition: aConditionToEvaluate ifTrue: trueBranch ifFalse: falseBranch 
+	
+	^self new initializeWithCondition: aConditionToEvaluate ifTrue: trueBranch ifFalse: falseBranch ! !
+
+!LetExpr methodsFor: 'initialization' stamp: 'CR 5/Jul/2026, 12:47:01 am (UTC)'!
+initializeWithBinds: aBindsList andBody: anExpressionsList 
+
+	bindsList := aBindsList.
+	expressionsList := anExpressionsList.! !
+
+!LetExpr methodsFor: 'evaluating' stamp: 'mm 8/Jul/2026, 12:53:28 pm (UTC)'!
+evaluateIn: aMachine 
+	
+	aMachine visitLet: self ! !
+
+!LetExpr methodsFor: 'accessing' stamp: 'mm 7/13/2026 01:44:36'!
+binds
+
+	^bindsList ! !
+
+!LetExpr methodsFor: 'accessing' stamp: 'mm 7/13/2026 01:44:40'!
+body
+
+	^expressionsList copy! !
+
+!LetExpr class methodsFor: 'instance creation' stamp: 'CR 5/Jul/2026, 12:46:36 am (UTC)'!
+withBinds: aBindsList andBody: anExpressionsList 
+	
+	^self new initializeWithBinds: aBindsList andBody: anExpressionsList ! !
+
+!LiteralExpr methodsFor: 'evaluating' stamp: 'CR 7/Jul/2026, 8:28:43 pm (UTC)'!
+evaluateIn: aMachine 
+
+	aMachine visitLiteral: self .! !
+
+!LiteralExpr methodsFor: 'initialization' stamp: 'mm 7/13/2026 01:44:52'!
+initializeWithValue: aConstantValue  
+
+	value := aConstantValue! !
+
+!LiteralExpr methodsFor: 'accessing' stamp: 'CR 7/Jul/2026, 8:29:53 pm (UTC)'!
+getValue
+	
+	^value! !
+
+!LiteralExpr class methodsFor: 'instance creation' stamp: 'CR 4/Jul/2026, 9:06:21 pm (UTC)'!
+value: aConstantValue  
+	^self new initializeWithValue: aConstantValue  ! !
+
+!ObserveExpr methodsFor: 'as yet unclassified' stamp: 'mm 7/13/2026 01:45:00'!
+evaluateIn: aMachine 
+
+	aMachine visitObserve: self! !
+
+!ObserveExpr methodsFor: 'as yet unclassified' stamp: 'mm 7/13/2026 01:45:04'!
+from: aProbabilityDistribution value: anObservation   
+
+	distribution := aProbabilityDistribution .
+	observedValue := anObservation ! !
+
+!ObserveExpr methodsFor: 'as yet unclassified' stamp: 'mm 7/13/2026 01:45:07'!
+from: aProbabilityDistribution value: anObservation fromMachine: aMachine  
+
+	distribution := aProbabilityDistribution .
+	observedValue := anObservation ! !
+
+!ObserveExpr methodsFor: 'accessing' stamp: 'mm 9/Jul/2026, 4:19:00 pm (UTC)'!
+distribution
+	
+	^distribution! !
+
+!ObserveExpr methodsFor: 'accessing' stamp: 'mm 9/Jul/2026, 4:18:49 pm (UTC)'!
+observedValue
+	
+	^observedValue! !
+
+!ObserveExpr class methodsFor: 'instance creation' stamp: 'mm 11/Jul/2026, 3:52:17 pm (UTC)'!
+from: aProbabilityDistribution value: anObservation   
+	^self new from: aProbabilityDistribution value: anObservation ! !
+
+!ObserveExpr class methodsFor: 'instance creation' stamp: 'CR 10/Jul/2026, 9:19:03 pm (UTC)'!
+from: aProbabilityDistribution value: anObservation fromMachine: aMachine  
+	^self new from: aProbabilityDistribution value: anObservation fromMachine: self ! !
+
+!SampleExpr methodsFor: 'as yet unclassified' stamp: 'mm 7/13/2026 01:45:18'!
+distribution
+
+	^distribution! !
+
+!SampleExpr methodsFor: 'as yet unclassified' stamp: 'mm 7/13/2026 01:45:23'!
+evaluateIn: aMachine 
+
+	aMachine visitSample: self! !
+
+!SampleExpr methodsFor: 'as yet unclassified' stamp: 'mm 7/13/2026 01:45:27'!
+from: aBernoulliProbabilityDistribution 
+
+	distribution := aBernoulliProbabilityDistribution ! !
+
+!SampleExpr class methodsFor: 'instance creation' stamp: 'mm 9/Jul/2026, 2:57:36 pm (UTC)'!
+from: aProbabilityDistribution 
+	^self new from: aProbabilityDistribution ! !
+
+!VariableExpr methodsFor: 'initialization' stamp: 'CR 4/Jul/2026, 9:30:56 pm (UTC)'!
+initializeWithName: aVariableName 
+
+	name := aVariableName.! !
+
+!VariableExpr methodsFor: 'accessing' stamp: 'mm 7/13/2026 01:45:38'!
+name
+
+	^name! !
+
+!VariableExpr methodsFor: 'evaluating' stamp: 'mm 8/Jul/2026, 12:40:02 pm (UTC)'!
+evaluateIn: aMachine 
+
+	aMachine visitVariable: self. 
+	! !
+
+!VariableExpr class methodsFor: 'as yet unclassified' stamp: 'CR 4/Jul/2026, 9:30:19 pm (UTC)'!
+name: aVariableName 
+	^self new initializeWithName: aVariableName .! !
+
+!RestoreEnvironment methodsFor: 'as yet unclassified' stamp: 'mm 7/13/2026 01:45:45'!
+evaluateIn: aMachine 
+
+	aMachine restoreEnvironment: environmentCorruptor oldEnvironment.! !
+
+!RestoreEnvironment methodsFor: 'as yet unclassified' stamp: 'mm 7/13/2026 01:45:49'!
+from: aLetContinuation 
+
+	environmentCorruptor := aLetContinuation ! !
+
+!RestoreEnvironment class methodsFor: 'instance creation' stamp: 'mm 8/Jul/2026, 1:43:11 pm (UTC)'!
+from: aLetContinuation 
+	^self new from: aLetContinuation ! !
+
+!ProbabilityDistribution methodsFor: 'accessing' stamp: 'mm 7/13/2026 01:46:44'!
+evaluateIn: aMachine
+
 	aMachine visitDistribution: self! !
 
-!ProbabilityDistribution methodsFor: 'accessing' stamp: 'jmv 6/Apr/2015, 3:03:00 pm (UTC)'!
+!ProbabilityDistribution methodsFor: 'accessing' stamp: 'mm 7/13/2026 01:46:59'!
 uniformRandomGenerator
-	^uniformRandomGenerator ifNil: [ uniformRandomGenerator _ Random new ]! !
 
-!ProbabilityDistribution methodsFor: 'as yet unclassified' stamp: 'mm 11/Jul/2026, 2:57:01 pm (UTC)'!
+	^uniformRandomGenerator ifNil: [ uniformRandomGenerator := Random new ]! !
+
+!ProbabilityDistribution methodsFor: 'as yet unclassified' stamp: 'mm 7/13/2026 01:46:54'!
 logProbability: x
 
 	self subclassResponsibility.
-	 "Calcula el logaritmo de la densidad de probabilidad (log-PDF) para un valor x."
+	 "Calcula el logaritmo de la densidad de probabilidad para un valor x."
     ! !
 
-!BernoulliProbabilityDistribution methodsFor: 'as yet unclassified' stamp: 'mm 11/Jul/2026, 2:57:01 pm (UTC)'!
+!BernoulliProbabilityDistribution methodsFor: 'as yet unclassified' stamp: 'mm 7/13/2026 01:47:55'!
 logProbability: x
-    "Calcula el logaritmo de la probabilidad para x (1 o 0)"
-    
-    x = 1 ifTrue: [ ^ p ln ].
-    x = 0 ifTrue: [ ^ (1.0 - p) ln ].
-    
-    self error: 'El valor observado para Bernoulli debe ser 0 o 1'.! !
 
-!BernoulliProbabilityDistribution methodsFor: 'as yet unclassified' stamp: 'mm 9/Jul/2026, 2:44:29 pm (UTC)'!
+	"Calcula el logaritmo de la probabilidad para x (1 o 0)"
+    
+	x = 1 ifTrue: [ ^ p ln ].
+	x = 0 ifTrue: [ ^ (1.0 - p) ln ].
+    
+	self error: 'El valor observado para Bernoulli debe ser 0 o 1'.! !
+
+!BernoulliProbabilityDistribution methodsFor: 'as yet unclassified' stamp: 'mm 7/13/2026 01:47:51'!
 nextRandomNumber
-    "Genera un número uniforme entre 0.0 y 1.0. 
-     Si cae dentro del rango de p, devuelve 1 (éxito). Si no, 0 (fracaso)."
-    
-    ^ self uniformRandomGenerator next < p 
-        ifTrue: [ 1 ] 
-        ifFalse: [ 0 ]! !
 
-!BernoulliProbabilityDistribution methodsFor: 'as yet unclassified' stamp: 'mm 9/Jul/2026, 2:42:19 pm (UTC)'!
+	"Genera un número uniforme entre 0.0 y 1.0. 
+	    Si cae dentro del rango de p, devuelve 1 (éxito). Si no, 0 (fracaso)."
+
+	^ self uniformRandomGenerator next < p 
+	    ifTrue: [ 1 ] 
+	    ifFalse: [ 0 ]! !
+
+!BernoulliProbabilityDistribution methodsFor: 'as yet unclassified' stamp: 'mm 7/13/2026 01:48:00'!
 p: aProbability
+
     p := aProbability.! !
 
 !BernoulliProbabilityDistribution class methodsFor: 'as yet unclassified' stamp: 'mm 9/Jul/2026, 2:41:52 pm (UTC)'!
@@ -1630,49 +1680,52 @@ p: aProbability
     (aProbability between: 0 and: 1) ifFalse: [ self error: 'La probabilidad debe estar entre 0 y 1' ].
     ^ self new p: aProbability! !
 
-!NormalProbabilityDistribution methodsFor: 'initialization' stamp: 'jmv 6/Apr/2015, 3:08:00 pm (UTC)'!
+!NormalProbabilityDistribution methodsFor: 'initialization' stamp: 'mm 7/13/2026 01:48:40'!
 mean: mu standardDeviation: sigma
-	mean _ mu.
-	standardDeviation _ sigma! !
 
-!NormalProbabilityDistribution methodsFor: 'random number generation' stamp: 'mm 11/Jul/2026, 2:57:01 pm (UTC)'!
+	mean := mu.
+	standardDeviation := sigma! !
+
+!NormalProbabilityDistribution methodsFor: 'random number generation' stamp: 'mm 7/13/2026 01:48:35'!
 logProbability: x
-   
-    | variance logScale exponentTerm |
-    
-    variance := standardDeviation squared.
-    
-    "Primer término de la ecuación"
-    logScale := (2.0 * Float pi * variance) ln * -0.5.
-    
-    "Segundo término de la ecuación"
-    exponentTerm := (x - mean) squared / (2.0 * variance).
-    
-    ^ logScale - exponentTerm.! !
 
-!NormalProbabilityDistribution methodsFor: 'random number generation' stamp: 'jmv 6/Apr/2015, 3:06:00 pm (UTC)'!
+	| variance logScale exponentTerm |
+
+	variance := standardDeviation squared.
+
+	"Primer término de la ecuación"
+	logScale := (2.0 * Float pi * variance) ln * -0.5.
+
+	"Segundo término de la ecuación"
+	exponentTerm := (x - mean) squared / (2.0 * variance).
+
+	^ logScale - exponentTerm.! !
+
+!NormalProbabilityDistribution methodsFor: 'random number generation' stamp: 'mm 7/13/2026 01:48:46'!
 nextRandomNumber
+
 	"Two random values are generated. So, answer one and cache the other."
 
 	^self nextStandardNormalRandomNumber * standardDeviation  + mean! !
 
-!NormalProbabilityDistribution methodsFor: 'random number generation' stamp: 'jmv 6/Apr/2015, 3:06:00 pm (UTC)'!
+!NormalProbabilityDistribution methodsFor: 'random number generation' stamp: 'mm 7/13/2026 01:48:59'!
 nextStandardNormalRandomNumber
+
 	"Two random values are generated. So, answer one and cache the other."
 
 	| x1 x2 t1 t2 y1 y2 |
 	cachedValue notNil
 		ifTrue: [
-			y1 _ cachedValue.
-			cachedValue _ nil.
+			y1 := cachedValue.
+			cachedValue := nil.
 			^ y1 ].
-	x1 _ self uniformRandomGenerator next.
-	x2 _ self uniformRandomGenerator next.
-	t1 _ (-2 * x1 ln) sqrt.
-	t2 _ 2 * Float pi * x2.
-	y1 _ t1 * t2 cos.
-	y2 _ t1 * t2 sin.
-	cachedValue _ y2.
+	x1 := self uniformRandomGenerator next.
+	x2 := self uniformRandomGenerator next.
+	t1 := (-2 * x1 ln) sqrt.
+	t2 := 2 * Float pi * x2.
+	y1 := t1 * t2 cos.
+	y2 := t1 * t2 sin.
+	cachedValue := y2.
 	^ y1! !
 
 !NormalProbabilityDistribution class methodsFor: 'instance creation' stamp: 'jmv 6/Apr/2015, 3:08:00 pm (UTC)'!
@@ -1683,21 +1736,8 @@ mean: mu standardDeviation: sigma
 new
 	^self mean: 0.0 standardDeviation: 1.0! !
 
-!RestoreEnvironment methodsFor: 'as yet unclassified' stamp: 'mm 8/Jul/2026, 1:40:45 pm (UTC)'!
-evaluateIn: aMachine 
-	aMachine restoreEnvironment: environmentCorruptor oldEnvironment.! !
-
-!RestoreEnvironment methodsFor: 'as yet unclassified' stamp: 'mm 8/Jul/2026, 1:43:11 pm (UTC)'!
-from: aLetContinuation 
-	environmentCorruptor := aLetContinuation ! !
-
-!RestoreEnvironment class methodsFor: 'instance creation' stamp: 'mm 8/Jul/2026, 1:43:11 pm (UTC)'!
-from: aLetContinuation 
-	^self new from: aLetContinuation ! !
-
-!DoneNotification methodsFor: 'initialization' stamp: 'CR 10/Jul/2026, 11:18:33 pm (UTC)'!
+!DoneNotification methodsFor: 'initialization' stamp: 'mm 7/13/2026 01:45:59'!
 defaultAction
-
 
 	^self! !
 
@@ -1707,8 +1747,9 @@ initializeFinalResult: aResultValue fromMachine: aMachine
 	result := aResultValue.
 	machine := aMachine.! !
 
-!DoneNotification methodsFor: 'accessing' stamp: 'CR 10/Jul/2026, 11:29:55 pm (UTC)'!
+!DoneNotification methodsFor: 'accessing' stamp: 'mm 7/13/2026 01:46:04'!
 machine
+
 	^machine! !
 
 !DoneNotification methodsFor: 'accessing' stamp: 'CR 10/Jul/2026, 11:24:13 pm (UTC)'!
@@ -1721,8 +1762,9 @@ finalResult: result fromMachine: aMachine
 
 	^self new initializeFinalResult: result fromMachine: aMachine ! !
 
-!ObserveNotification methodsFor: 'initialization' stamp: 'CR 10/Jul/2026, 9:19:22 pm (UTC)'!
+!ObserveNotification methodsFor: 'initialization' stamp: 'mm 7/13/2026 01:46:27'!
 from: aProbabilityDistribution value: anObservation fromMachine: aMachine  
+
 	distribution := aProbabilityDistribution .
 	observedValue:=anObservation .
 	machine:= aMachine ! !
@@ -1751,8 +1793,9 @@ distribution
 	
 	^distribution! !
 
-!SampleNotification methodsFor: 'initialization' stamp: 'mm 9/Jul/2026, 3:30:48 pm (UTC)'!
+!SampleNotification methodsFor: 'initialization' stamp: 'mm 7/13/2026 01:46:38'!
 from: aProbabilityDistribution 
+
 	distribution := aProbabilityDistribution ! !
 
 !SampleNotification class methodsFor: 'instance creation' stamp: 'mm 9/Jul/2026, 3:30:26 pm (UTC)'!
@@ -1925,13 +1968,13 @@ test10ParsesCorrectlyToFunctionExpression
 	self assert: fnExpr body size equals: 1.
 	self assert: (fnExpr body first isKindOf: CallExpr).! !
 
-!HOPPLParserTest methodsFor: 'as yet unclassified' stamp: 'mm 7/12/2026 20:35:54'!
+!HOPPLParserTest methodsFor: 'as yet unclassified' stamp: 'mm 7/13/2026 00:40:32'!
 test11ParsesCorrectlyToFunctionExpressionMultipleParamsAndBody
 	"[fn, [x, y], x, [+, x, y]] -> dos parametros, dos formas en el body"
 	| parser parsedProgram fnExpr |
 	parser := HOPPLParser new.
 	parsedProgram := parser parseProgram:
-		{ {#fn. {#x. #y}. {#x. {#+. #x. #y}}} }.
+		{ {#fn. {#x. #y}.{#-. #x. #y}. {#+. #x. #y}}}.
 
 	fnExpr := parsedProgram second first.
 	self assert: fnExpr arguments size equals: 2.
@@ -1939,10 +1982,11 @@ test11ParsesCorrectlyToFunctionExpressionMultipleParamsAndBody
 	self assert: fnExpr arguments second name equals: #y.
 
 	self assert: fnExpr body size equals: 2.
-	self assert: (fnExpr body first isKindOf: VariableExpr).
-	self assert: (fnExpr body second isKindOf: CallExpr).! !
+	self assert: (fnExpr body first isKindOf: CallExpr).
+	self assert: (fnExpr body second isKindOf: CallExpr).
+	! !
 
-!HOPPLParserTest methodsFor: 'as yet unclassified' stamp: 'mm 7/12/2026 20:53:58'!
+!HOPPLParserTest methodsFor: 'as yet unclassified' stamp: 'mm 7/13/2026 00:21:09'!
 test12ParsesDefnIntoClosureInEnvironment
 	"[defn, f, [y], [+, y, 1]]  seguido de la expresion principal (f 3)"
 	| parser parsedProgram env closure |
@@ -1960,7 +2004,7 @@ test12ParsesDefnIntoClosureInEnvironment
 	self assert: closure parameters first name equals: #y.
 	self assert: closure body size equals: 1.
 	self assert: (closure body first isKindOf: CallExpr).
-	self assert: closure environment == env. "closure captura el mismo entorno global"
+	self assert: closure environment = env. "closure captura el mismo entorno global"
 
 	"la expresion principal (fuera del defn) SI aparece en mainForms"
 	self assert: parsedProgram second size equals: 1.
@@ -2096,9 +2140,11 @@ test19ParsesImmediatelyAppliedFnMultipleArguments
 	self assert: callExpr arguments first getValue equals: 3.
 	self assert: callExpr arguments second getValue equals: 4.! !
 
-!TPTest methodsFor: 'as yet unclassified' stamp: 'CR 4/Jul/2026, 9:23:35 pm (UTC)'!
+!HOPPLTest methodsFor: 'as yet unclassified' stamp: 'mm 7/13/2026 01:31:47'!
 test01SeCreaBienLaMaquina
+
 	| aControlStack m env expr ev |
+	
 	env := Dictionary new.
 	expr := 1 + 2.
 	
@@ -2113,8 +2159,9 @@ test01SeCreaBienLaMaquina
 	
 	! !
 
-!TPTest methodsFor: 'as yet unclassified' stamp: 'mm 7/12/2026 20:00:02'!
+!HOPPLTest methodsFor: 'as yet unclassified' stamp: 'mm 7/13/2026 01:31:41'!
 test02CanEvaluateLiteralExpr
+
 	| m result parsedProgram parser controlStack environment |
 	
 	parser := HOPPLParser new.
@@ -2128,7 +2175,7 @@ test02CanEvaluateLiteralExpr
 	
 ! !
 
-!TPTest methodsFor: 'as yet unclassified' stamp: 'mm 7/12/2026 20:01:12'!
+!HOPPLTest methodsFor: 'as yet unclassified' stamp: 'mm 7/12/2026 20:01:12'!
 test03CanEvaluateVariableExpr
 
 	| m controlStack environment parsedProgram parser |
@@ -2145,10 +2192,11 @@ test03CanEvaluateVariableExpr
 	
 	 [m resume]on: DoneNotification do: [:doneNotification | self assert: doneNotification result equals: 4. ].! !
 
-!TPTest methodsFor: 'as yet unclassified' stamp: 'mm 7/12/2026 20:04:01'!
+!HOPPLTest methodsFor: 'as yet unclassified' stamp: 'mm 7/13/2026 01:31:35'!
 test04_aCanEvaluateIfExprWithLiteralCondition
 
 	| m controlStack environment parsedProgram parser |
+	
 	parser := HOPPLParser new.
 	parsedProgram := parser parseProgram: {{#if. true. 1. 0}}.
 	
@@ -2160,10 +2208,11 @@ test04_aCanEvaluateIfExprWithLiteralCondition
 	 [m resume]on: DoneNotification do: [:doneNotification | self assert: doneNotification result equals: 1. ].
 	! !
 
-!TPTest methodsFor: 'as yet unclassified' stamp: 'mm 7/12/2026 20:05:51'!
+!HOPPLTest methodsFor: 'as yet unclassified' stamp: 'mm 7/13/2026 01:31:29'!
 test04_bCanEvaluateIfExprWithComplexCondition
 
 	| m controlStack environment parsedProgram parser |
+	
 	parser := HOPPLParser new.
 	parsedProgram := parser parseProgram: {{#if. {#>. 1. 2}. 1. 0}}.
 	
@@ -2177,10 +2226,11 @@ test04_bCanEvaluateIfExprWithComplexCondition
 	
 	! !
 
-!TPTest methodsFor: 'as yet unclassified' stamp: 'mm 7/12/2026 20:11:21'!
+!HOPPLTest methodsFor: 'as yet unclassified' stamp: 'mm 7/13/2026 01:31:24'!
 test05_aCanEvaluateLetExprWithSingleBind
 
 	| m controlStack environment parsedProgram parser |
+	
 	parser := HOPPLParser new.
 	parsedProgram := parser parseProgram: {{#let. {#x. 2}. {#+. #x. 3}}}.
 	
@@ -2196,10 +2246,11 @@ test05_aCanEvaluateLetExprWithSingleBind
 	
 	! !
 
-!TPTest methodsFor: 'as yet unclassified' stamp: 'mm 7/12/2026 20:13:09'!
+!HOPPLTest methodsFor: 'as yet unclassified' stamp: 'mm 7/13/2026 01:31:19'!
 test05_bCanEvaluateLetExprWithMultipleBinds
 
 	| m controlStack environment parsedProgram parser |
+	
 	parser := HOPPLParser new.
 	parsedProgram := parser parseProgram: {{#let. {#x. 2. #y. 3}. #x. {#+. #x. #y}} }.
 	
@@ -2216,10 +2267,11 @@ test05_bCanEvaluateLetExprWithMultipleBinds
 	
 	! !
 
-!TPTest methodsFor: 'as yet unclassified' stamp: 'mm 7/12/2026 20:45:27'!
+!HOPPLTest methodsFor: 'as yet unclassified' stamp: 'mm 7/13/2026 01:28:57'!
 test06CanEvaluateUserDefinedCallExprFunction
 	
 	| m controlStack environment parsedProgram parser |
+	
 	parser := HOPPLParser new.
 	parsedProgram := parser parseProgram: {{#defn. #f. {#x}. {{#+. #x. 2}}}.{#f. 1.} }.
 	
@@ -2234,13 +2286,14 @@ test06CanEvaluateUserDefinedCallExprFunction
 	
 ! !
 
-!TPTest methodsFor: 'as yet unclassified' stamp: 'mm 7/12/2026 21:23:37'!
+!HOPPLTest methodsFor: 'as yet unclassified' stamp: 'mm 7/13/2026 01:28:50'!
 test07CanEvaluateFunctionExpr
 	
 	| m controlStack environment parsedProgram parser  |
+	
 	parser := HOPPLParser new.
 	parsedProgram := parser parseProgram: {{ {#fn. {#x. #y}. {#+. #x. #y}}. 3. 4 }}.
-	"HOLA CLARI"
+	
 	controlStack := parsedProgram second.
 	environment := parsedProgram first.
 	
@@ -2249,9 +2302,11 @@ test07CanEvaluateFunctionExpr
      [m resume]on: DoneNotification do: [:doneNotification | self assert: doneNotification result equals: 7. ].
 ! !
 
-!TPTest methodsFor: 'as yet unclassified' stamp: 'mm 7/12/2026 21:04:54'!
+!HOPPLTest methodsFor: 'as yet unclassified' stamp: 'mm 7/13/2026 01:28:45'!
 test08_aCanEvaluateSampleExpr
-| controlStack environment parsedProgram parser likelihoodIC |
+
+	| controlStack environment parsedProgram parser likelihoodIC |
+
 	parser := HOPPLParser new.
 	parsedProgram := parser parseProgram: {{#sample. {#bernoulli. 1}}}.
 	
@@ -2266,9 +2321,11 @@ test08_aCanEvaluateSampleExpr
 		 self assert: doneNotification result equals: 1. 
 		self assert: doneNotification machine logWeight equals: 0].! !
 
-!TPTest methodsFor: 'as yet unclassified' stamp: 'mm 7/12/2026 21:17:48'!
+!HOPPLTest methodsFor: 'as yet unclassified' stamp: 'mm 7/13/2026 01:28:33'!
 test08_bCanEvaluateSampleExpr
-| controlStack environment parsedProgram parser likelihoodIC |
+
+	| controlStack environment parsedProgram parser likelihoodIC |
+
 	parser := HOPPLParser new.
 	parsedProgram := parser parseProgram: {#sample.{#if. {false}. {#bernoulli. 0}. {#bernoulli. 1}}}.
 	
@@ -2284,10 +2341,11 @@ test08_bCanEvaluateSampleExpr
 		self assert: doneNotification machine logWeight equals: 0].
 	! !
 
-!TPTest methodsFor: 'as yet unclassified' stamp: 'mm 7/12/2026 21:19:39'!
+!HOPPLTest methodsFor: 'as yet unclassified' stamp: 'mm 7/13/2026 01:28:21'!
 test09CanEvaluateObserveExpr
 
 	| controlStack environment parsedProgram parser likelihoodIC |
+	
 	parser := HOPPLParser new.
 	parsedProgram := parser parseProgram: {#observe.{#bernoulli. 1.}. 1}.
 	
@@ -2303,104 +2361,86 @@ test09CanEvaluateObserveExpr
 		self assert: doneNotification machine logWeight equals: 0].
 	! !
 
-!TPTest methodsFor: 'as yet unclassified' stamp: 'mm 7/12/2026 23:19:54'!
+!HOPPLTest methodsFor: 'as yet unclassified' stamp: 'mm 7/13/2026 01:28:08'!
 test10CanRunLikelihoodWeighting10Times
 
-    |  parsedProgram parser likelihoodIC  result logWeights values | 
-    
-    parser := HOPPLParser new.
-    parsedProgram := parser parseProgram: {#observe.{#bernoulli. 1.}. 1}.
-    
-    
-    likelihoodIC := LikelihoodIC for: parsedProgram  .
-    
-    result := likelihoodIC run: 10.
-        
-    values := OrderedCollection new .
-    logWeights := OrderedCollection new. 
-    10 timesRepeat: [values add: 1. logWeights add: 0.1.].
-    
-    
+	|  parsedProgram parser likelihoodIC  result logWeights values | 
 
-    self assert: {values.logWeights} asOrderedCollection equals: result! !
+	parser := HOPPLParser new.
+	parsedProgram := parser parseProgram: {#observe.{#bernoulli. 1.}. 1}.
 
-!TPTest methodsFor: 'as yet unclassified' stamp: 'mm 7/12/2026 23:25:00'!
+
+	likelihoodIC := LikelihoodIC for: parsedProgram  .
+
+	result := likelihoodIC run: 10.
+	    
+	values := OrderedCollection new .
+	logWeights := OrderedCollection new. 
+	10 timesRepeat: [values add: 1. logWeights add: 0.1.].
+
+
+	self assert: {values.logWeights} asOrderedCollection equals: result! !
+
+!HOPPLTest methodsFor: 'as yet unclassified' stamp: 'mm 7/13/2026 01:25:33'!
 test11CanRunSMC
 
-    | smcIC  result parsedProgram parser | 
-    
-    parser := HOPPLParser new.
-    parsedProgram := parser parseProgram: {{#observe.{#bernoulli. 1.}. 0}.{#sample. {#bernoulli. 1.}}.{#observe.{#bernoulli. 1.}. 1}}.
-    
-    smcIC := SequentialMCIC for: parsedProgram.
-    
-    result := smcIC run: 1.
+	| smcIC  result parsedProgram parser | 
 
-    self assert: (result allSatisfy: [:notification | notification isKindOf: DoneNotification]).
-    self assert: (result allSatisfy: [:notification | notification result = 1]).! !
+	parser := HOPPLParser new.
+	parsedProgram := parser parseProgram: {{#observe.{#bernoulli. 1.}. 0}.{#sample. {#bernoulli. 1.}}.{#observe.{#bernoulli. 1}. 1}}.
 
-!TPTest methodsFor: 'as yet unclassified' stamp: 'mm 7/12/2026 23:40:33'!
+	smcIC := SequentialMCIC for: parsedProgram.
+
+	result := smcIC run: 1.
+
+	self assert: (result allSatisfy: [:notification | notification isKindOf: DoneNotification]).
+	self assert: (result allSatisfy: [:notification | notification result = 1]).! !
+
+!HOPPLTest methodsFor: 'as yet unclassified' stamp: 'mm 7/13/2026 01:26:35'!
 test12SMCCanRunMultipleParticles
 
-    | smcIC  result parsedProgram parser | 
-    
-    parser := HOPPLParser new.
-    parsedProgram := parser parseProgram: {{#observe.{#bernoulli. 1.}. 0}.{#sample. {#bernoulli. 1.}}.{#observe.{#bernoulli. 1.}. 1}}.
-    
-    smcIC := SequentialMCIC for: parsedProgram.
-    
-    result := smcIC run: 3.
+	| smcIC  result parsedProgram parser | 
 
-    self assert: (result allSatisfy: [:notification | notification isKindOf: DoneNotification]).
-    self assert: (result allSatisfy: [:notification | notification result = 1]).! !
+	parser := HOPPLParser new.
+	parsedProgram := parser parseProgram: {{#observe.{#bernoulli. 1.}. 0}.{#sample. {#bernoulli. 1.}}.{#observe.{#bernoulli. 1.}. 1}}.
 
-!TPTest methodsFor: 'as yet unclassified' stamp: 'mm 12/Jul/2026, 9:19:26 pm (UTC)'!
+	smcIC := SequentialMCIC for: parsedProgram.
+
+	result := smcIC run: 3.
+
+	self assert: (result allSatisfy: [:notification | notification isKindOf: DoneNotification]).
+	self assert: (result allSatisfy: [:notification | notification result = 1]).! !
+
+!HOPPLTest methodsFor: 'as yet unclassified' stamp: 'mm 7/13/2026 01:28:00'!
 test13SMCLogWeightsAreCoherent
 
-    | smcIC program distribution expectedLogWeight result |
-    
-    distribution := BernoulliProbabilityDistribution p: 0.5.
-    
-    "1. Un programa puramente determinístico para testear la matemática.
-        Dos observaciones seguidas. Probabilidad total = 0.25"
-    program := {
-        ObserveExpr from: distribution value: (LiteralExpr value: 1). 
-        ObserveExpr from: distribution value: (LiteralExpr value: 0). 
-    } asOrderedCollection.
-            
-    smcIC := SequentialMCIC for: program.
-    result := smcIC run: 5. "Corremos con 5 partículas"
-    
-    "2. Calculamos el logaritmo natural esperado."
-    expectedLogWeight := 0.25 ln. 
-    
-    "3. Verificamos los pesos."
-    
-    self assert: (result allSatisfy: [ :notification | 
-        "Usamos #isWithin:floatsFrom: en lugar de = porque estamos comparando Floats"
-        notification machine logWeight isWithin: 10 floatsFrom: expectedLogWeight
-    ]).! !
+	| smcIC parsedProgram expectedLogWeight result parser|
 
-!TPTest methodsFor: 'as yet unclassified' stamp: 'mm 12/Jul/2026, 9:19:33 pm (UTC)'!
+	parser := HOPPLParser new.
+	parsedProgram := parser parseProgram: {{#observe.{#bernoulli. 0.5.}. 1}.{#observe.{#bernoulli. 0.5.}. 0}}.
+
+	    smcIC := SequentialMCIC for: parsedProgram.
+	    result := smcIC run: 5. 
+
+	    expectedLogWeight := 0.25 ln. 
+	    
+	    self assert: (result allSatisfy: [ :notification | 
+	        "Usamos #isWithin:floatsFrom: en lugar de = porque estamos comparando Floats"
+	        notification machine logWeight isWithin: 10 floatsFrom: expectedLogWeight
+	    ]).! !
+
+!HOPPLTest methodsFor: 'as yet unclassified' stamp: 'mm 7/13/2026 01:27:33'!
 test14CanRunSSMH
-    | ssmhIC program distribution result |
-    
-	distribution := BernoulliProbabilityDistribution p: 0.5.
-    
-	program := {
-	        SampleExpr from: distribution. 
-	        ObserveExpr from: distribution value: (LiteralExpr value: 1). 
-	    } asOrderedCollection.
-	 
-	
-	ssmhIC := SSMetropolisHastingsIC for: program.
-	result := ssmhIC runSteps:2.
-	
-	self assert: result size equals: 2.
-	self assert: result equals: {1. 1}asOrderedCollection 
-	
-    
-    ! !
+	| ssmhIC  result parsedProgram parser |
+
+	  parser := HOPPLParser new.
+	  parsedProgram := parser parseProgram: {{#sample.{#bernoulli. 0.5.}}.{#observe.{#bernoulli. 0.5.}. 1}}.
+	  
+	  ssmhIC := SSMetropolisHastingsIC for: parsedProgram .
+	  result := ssmhIC runSteps:2.
+	  
+	  self assert: result size equals: 2.
+	  self assert: result equals: {1. 1}asOrderedCollection! !
 
 !OrderedCollection methodsFor: '*ILPP' stamp: 'mm 7/12/2026 19:03:55'!
 softmax

@@ -1,5 +1,3 @@
-# hoppl-smalltalk
-HOPPL-style probabilistic programming language in Smalltalk — likelihood weighting, SMC, and single-site MH over one shared evaluator, using resumable exceptions for sample/observe.
 # HOPPL in Smalltalk
 
 A Smalltalk implementation of a small probabilistic programming language (HOPPL-style), translated from a Python reference implementation built around a **message-passing evaluator**: the evaluator emits `sample`/`observe` effects and never performs inference itself — an external controller decides how to answer each effect. The same evaluator core is reused, unmodified, by three different inference algorithms.
